@@ -1,6 +1,22 @@
 # Comparative Genome Observatory
 
+![Explorer showing synthetic fixture ribbons between two assemblies, with Chr 2 selected and the inspector populated](docs/screenshots/overview.png)
+
+_The Explorer running locally against the bundled synthetic fixture (not biological data): ribbons connect two fixture assemblies, a Chr 2 interval is selected, and the inspector lists the corresponding evidence._
+
 A local comparative genomics workbench for inspecting alignment evidence, selecting genomic intervals, and exploring chromosome-scale correspondence. The repository currently ships a **synthetic interaction fixture**, not reference genomes or empirical comparative results. Its purpose is to make the user interface, API, and coordinate handling runnable while the full production data pipeline is developed.
+
+## Screenshots
+
+All captures are from the running app with the synthetic fixture.
+
+| Dot plot with a selected interval                                                                                          | Gene order view                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| ![Dot plot view with Chr 1 selected and the inspector showing the supported correspondence](docs/screenshots/dot-plot.png) | ![Gene order view showing fixture gene marks for both assemblies](docs/screenshots/gene-order.png) |
+
+![Ribbons filtered to reverse-orientation blocks and colored by sequence identity](docs/screenshots/filters-reverse-identity.png)
+
+_Orientation filter set to reverse (2 of 6 blocks), colored by sequence identity; the evidence table updates to match._
 
 ## Current capabilities
 
@@ -11,6 +27,12 @@ A local comparative genomics workbench for inspecting alignment evidence, select
 - React dashboard built with Vite and a pnpm lockfile; Python API and scientific utilities use the standard library.
 
 The catalog, gene annotations, and relationships are synthetic. NCBI RefSeq/Ensembl integration, FASTA/GFF indexing, a persistent database/job queue, orthology, synteny inference, production data views, and production deployment are not implemented yet. Dot plot and gene-order views only visualize the synthetic fixture and do not claim biological relationships. Other catalog, gene, analysis, and settings navigation items are visual entry points. React currently mounts the dashboard; interaction logic is being migrated from the initial browser script in follow-on work.
+
+## Explore the workspace
+
+The Explorer opens with six synthetic alignment records across two fixture assemblies. Switch between ribbons, a position dot plot, and fixture gene marks; select a chromosome ruler to inspect the chosen interval and its corresponding evidence. Ribbon width follows aligned span, and reverse orientation is shown as alignment evidence rather than interpreted as an evolutionary inversion.
+
+For uploaded PAF records, the API validates fields and sequence bounds. Region projection uses `cg:Z` CIGAR operations for exact, gap-aware mappings when present; without CIGAR, it reports an approximate mapping. Uploaded data is held in memory for the current session and is not saved.
 
 ## Run locally
 
@@ -54,6 +76,22 @@ curl -H 'X-Filename: example.paf' --data-binary @example.paf http://127.0.0.1:80
 ```
 
 Coordinates are represented as 0-based, half-open integers. PAF records without a `cg:Z` tag can only be projected approximately across their aligned interval; CIGAR-aware projections work in either direction and report split intervals where gaps intervene. This is coordinate projection, not a claim of homology or orthology.
+
+For example, the checked-in [tiny PAF fixture](tests/fixtures/tiny.paf) imports as two records. A CIGAR containing a target-only gap can return separate mapped intervals:
+
+```json
+{
+  "intervals": [
+    [35, 50],
+    [60, 75]
+  ],
+  "precision": "exact CIGAR projection; gap-separated mappings remain split",
+  "orientation": "+",
+  "target_space": "target"
+}
+```
+
+This example is an API result from the included synthetic PAF fixture and demonstrates coordinate handling only.
 
 ## Checks
 

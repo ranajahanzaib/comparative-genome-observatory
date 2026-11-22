@@ -4,15 +4,24 @@ Contributions that improve scientific correctness, accessibility, security, docu
 
 ## Development setup
 
-The current project uses Python's standard library and browser APIs; no dependency installation is required. Python 3.10 or newer and Node.js are needed for the local checks.
+The API and scientific utilities use Python's standard library. The dashboard is a React application built with Vite, so running it in development requires Node.js, pnpm, and the locked frontend dependencies. Python 3.10 or newer is required for the API and tests.
 
 ```bash
 git clone https://github.com/ranajahanzaib/comparative-genome-observatory.git
 cd comparative-genome-observatory
-python3 server.py
+pnpm install --frozen-lockfile
 ```
 
-Open <http://127.0.0.1:8000> to use the application. In a second terminal, run:
+For the development dashboard, start the API and Vite in separate terminals:
+
+```bash
+python3 server.py
+pnpm dev
+```
+
+Open <http://127.0.0.1:5173>. Vite forwards API requests to the local Python service. To build and serve the production frontend locally instead, run `make run` and open <http://127.0.0.1:8000>.
+
+Run the checks with:
 
 ```bash
 make test
