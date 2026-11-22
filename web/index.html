@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#080d13">
+    <title>Comparative Genome Observatory</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+
+  <body>
+    <header class="topbar"><a class="brand" href="/"><span
+          class="brandmark">◈</span><span>GENOME<br><b>OBSERVATORY</b></span></a>
+      <div class="crumb">COMPARATIVE WORKSPACE <span>/</span> <b>EXPLORER</b></div>
+      <div class="top-actions"><span class="live"><i></i> LOCAL WORKSPACE</span><button class="icon-btn"
+          id="themeButton" title="Toggle light theme" aria-label="Toggle light theme">◐</button><button
+          class="avatar">R</button></div>
+    </header>
+    <div class="app-shell">
+      <aside class="rail" aria-label="Primary navigation"><a class="rail-item active" title="Explorer"
+          href="#explorer">⌘</a><a class="rail-item" title="Genome catalog" href="#catalog">▤</a><a class="rail-item"
+          title="Gene explorer" href="#genes">⌕</a><a class="rail-item" title="Analyses" href="#analyses">◷</a>
+        <div class="rail-spacer"></div><a class="rail-item" href="#methods" title="Methods">ⓘ</a><a class="rail-item"
+          href="#settings" title="Settings">⚙</a>
+      </aside>
+      <main id="explorer">
+        <section class="page-head">
+          <div>
+            <div class="eyebrow"><span class="pulse"></span> COMPARATIVE GENOMICS · EXPLORER</div>
+            <h1>Genome relationships,<br><em>in living color.</em></h1>
+            <p class="intro">Inspect alignment blocks across assemblies. Select an interval to see whether this fixture
+              includes a corresponding region and what evidence is available.</p>
+          </div>
+          <div class="head-tools"><button class="quiet-btn" id="fitBtn">⤢ &nbsp;Fit comparison</button><button
+              class="primary-btn" id="exportBtn">↧ &nbsp;Export figure</button></div>
+        </section>
+        <section class="provenance"><span class="warning-mark">!</span>
+          <div><b id="provenanceTitle">INTERACTION FIXTURE · NOT BIOLOGICAL DATA</b><span id="provenanceBody">All
+              organisms, coordinates, genes, and ribbon relationships below are synthetic, for interface and workflow
+              demonstration only.</span></div><a href="#methods">Data & methodology ↗</a>
+        </section>
+        <section class="workspace-grid">
+          <aside class="control-panel panel">
+            <div class="panel-title"><span>COMPARISON</span><button class="more">···</button></div>
+            <div class="field-label">REFERENCE ASSEMBLY</div><button class="assembly-select" id="genomeA"><span
+                class="species-icon teal">A</span><span><b>Asteria lucida</b><small>CGO-FIXTURE-01</small></span><span
+                class="chevron">⌄</span></button>
+            <div class="linkline"><span>↕</span><small>PAIRWISE ALIGNMENT</small></div>
+            <div class="field-label">COMPARATIVE ASSEMBLY</div><button class="assembly-select" id="genomeB"><span
+                class="species-icon violet">N</span><span><b>Nocturna
+                  caerulea</b><small>CGO-FIXTURE-02</small></span><span class="chevron">⌄</span></button><button
+              class="import-button" id="importPafButton">＋ &nbsp;Import alignment PAF</button><input type="file"
+              id="pafFile" accept=".paf,text/plain" hidden>
+            <div id="importStatus" class="import-status" role="status"></div>
+            <div class="divider"></div>
+            <div class="panel-title"><span>DISPLAY</span><span class="count" id="panelBlockCount">6 BLOCKS</span></div>
+            <div class="field-label">COLOR BY</div><select id="colorMode">
+              <option value="orientation">Alignment orientation</option>
+              <option value="identity">Sequence identity</option>
+              <option value="chromosome">Source chromosome</option>
+            </select>
+            <div class="filter-row"><span>Orientation</span><label class="segmented"><button class="selected"
+                  data-strand="all">Both</button><button data-strand="+">+</button><button
+                  data-strand="-">−</button></label></div>
+            <div class="filter-row"><span>Minimum identity</span><b id="identityValue">0%</b></div><input
+              id="identityFilter" type="range" min="0" max="100" value="0" aria-label="Minimum identity percentage">
+            <div class="field-label gap-top">RIBBON DENSITY</div><label class="checkrow"><input type="checkbox" checked
+                id="showRibbons"> Show alignment ribbons</label><label class="checkrow"><input type="checkbox" checked
+                id="showGenes"> Show gene marks</label>
+            <div class="divider"></div>
+            <div class="selection-label">ACTIVE REGION <span class="clear" id="clearSelection">Clear</span></div>
+            <div class="region-box" id="selectionSummary">No interval selected<span>Click a chromosome ruler to select a
+                region</span></div>
+            <div class="side-foot"><span>Coordinate basis</span><b>0-based · half-open</b></div>
+          </aside>
+          <section class="viz-column">
+            <div class="viz-toolbar">
+              <div class="view-tabs"><button class="active" data-view="ribbon">Ribbons</button><button
+                  data-view="dot">Dot plot</button><button data-view="order">Gene order</button></div>
+              <div class="viz-actions"><span class="dim-label">VIEW</span><button class="icon-btn" id="zoomOut"
+                  aria-label="Zoom out">−</button><button class="icon-btn" id="zoomIn"
+                  aria-label="Zoom in">+</button><button class="icon-btn" id="resetZoom"
+                  aria-label="Reset zoom">⌂</button><span class="vert-sep"></span><button class="icon-btn" id="fullBtn"
+                  title="Fullscreen">⛶</button></div>
+            </div>
+            <div class="viz-stage" id="vizStage">
+              <div class="viz-overline"><span id="vizHeading">CHROMOSOME CORRESPONDENCE <i>·</i> <b
+                    id="visibleCount">6</b> <span id="vizRecordLabel">SYNTENY BLOCKS</span></span><span
+                  class="scale-readout" id="scaleReadout">WHOLE ASSEMBLY VIEW</span></div>
+              <div class="ribbon-chart" id="chartWrap">
+                <div class="genome-row row-a">
+                  <div class="organism-label"><span class="species-icon teal">A</span><span><b>A. lucida</b><small>120
+                        Mb total</small></span></div>
+                  <div class="chromosomes" id="chromsA"></div>
+                </div>
+                <div class="ribbons-wrap"><canvas id="ribbonCanvas"
+                    aria-label="Interactive comparative genome ribbons"></canvas>
+                  <div class="canvas-empty" id="canvasEmpty" hidden>Ribbons hidden · turn them back on in Display</div>
+                </div>
+                <div class="genome-row row-b">
+                  <div class="organism-label"><span class="species-icon violet">N</span><span><b>N.
+                        caerulea</b><small>105 Mb total</small></span></div>
+                  <div class="chromosomes" id="chromsB"></div>
+                </div>
+                <div class="gene-order" id="geneOrder" hidden></div>
+                <div class="gene-track" id="geneTrack"></div>
+              </div>
+              <div class="legend"><span class="legend-title" id="legendHeading">ORIENTATION</span><span
+                  id="legendItems"><span><i class="legend-line forward"></i> Forward</span><span><i
+                      class="legend-line reverse"></i> Reverse</span></span><span><i
+                    class="legend-line selected-line"></i> Selected</span>
+                <div class="legend-right">Hover a ribbon for evidence <span>·</span> Click a ruler to map a region</div>
+              </div>
+              <div class="tooltip" id="tooltip" hidden></div>
+            </div>
+            <div class="summary-strip">
+              <div><span>ASSEMBLIES</span><b id="metricAssemblies">02</b><small id="metricAssembliesNote">synthetic
+                  fixture</small></div>
+              <div><span>ALIGNMENT BLOCKS</span><b id="statBlocks">06</b><small id="metricBlocksNote">illustrative
+                  only</small></div>
+              <div><span>GENE ANNOTATIONS</span><b id="metricGenes">04</b><small id="metricGenesNote">fixture
+                  marks</small></div>
+              <div class="summary-source"><span>PROVENANCE</span><b id="summaryProvenance">Repository fixture</b><small
+                  id="summarySourceNote">no external data sources</small></div>
+            </div>
+          </section>
+          <aside class="inspector panel">
+            <div class="panel-title"><span>INSPECTOR</span><span class="inspect-dot"></span></div>
+            <div id="inspectorContent">
+              <div class="inspect-empty">
+                <div class="empty-glyph">⌖</div><b>Choose an alignment</b>
+                <p>Select a ribbon or drag across a chromosome ruler to inspect mapped intervals and supporting
+                  evidence.</p>
+                <div class="empty-hint">YOUR SELECTION WILL APPEAR HERE</div>
+              </div>
+            </div>
+          </aside>
+        </section>
+        <section class="lower-grid">
+          <div class="panel evidence-panel">
+            <div class="panel-title"><span>ALIGNMENT EVIDENCE</span><span class="count" id="evidenceCount">6
+                RECORDS</span></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>BLOCK</th>
+                    <th>SOURCE LOCUS</th>
+                    <th>TARGET LOCUS</th>
+                    <th>ORIENT.</th>
+                    <th>IDENTITY</th>
+                    <th>MAPQ</th>
+                  </tr>
+                </thead>
+                <tbody id="evidenceRows"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel note-panel">
+            <div class="panel-title"><span>READING THIS VIEW</span><span class="info-icon">i</span></div>
+            <p>Ribbon width follows aligned span. A reverse strand indicates opposite alignment orientation; by itself,
+              it does not establish an evolutionary inversion.</p><a href="#methods">Methods and coordinate conventions
+              ↗</a>
+          </div>
+        </section>
+        <footer id="methods"><span>CGO · LOCAL SCIENTIFIC WORKSPACE</span><span>Fixture data · PAF import available via
+            API · <a href="/api/health">Service status</a></span></footer>
+      </main>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+
+</html>
