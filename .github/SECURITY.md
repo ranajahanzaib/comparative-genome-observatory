@@ -2,8 +2,8 @@
 
 ## Reporting a Vulnerability
 
-Please do not report security vulnerabilities through public GitHub issues.
+Do not disclose vulnerability details in public issues or pull requests.
 
-Instead, report them via GitHub's private [Security Advisories](../../security/advisories/new) feature. Include as much detail as possible: a description of the issue, steps to reproduce, and potential impact.
+If private vulnerability reporting is enabled for this repository, submit a report through [GitHub Security Advisories](https://github.com/ranajahanzaib/comparative-genome-observatory/security/advisories/new). If the private report form is unavailable, contact the repository owner through the [GitHub profile](https://github.com/ranajahanzaib) without posting exploit details publicly.
 
-You can expect an acknowledgment within 48 hours and a resolution timeline once the issue is confirmed.
+Include the affected commit or release, impact, and safe reproduction details. The project will coordinate disclosure and remediation with the reporter.

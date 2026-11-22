@@ -6,21 +6,20 @@ labels: bug
 assignees: ''
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Summary**
+Describe the observed behavior.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. See error
+**Steps to reproduce**
+Describe the smallest data setup and sequence of actions that reproduces the issue.
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+Describe what should happen instead.
 
 **Environment**
-- OS: [e.g. macOS 26.4.1, Windows 11, Ubuntu 24.04.4]
-- Version: [e.g. 1.0.0]
+- Operating system:
+- Browser:
+- Commit or release:
+- Data format and relevant tool versions:
 
 **Additional context**
-Add any other context or screenshots here.
+Add relevant logs or screenshots after removing private genomic data, credentials, and personal information.

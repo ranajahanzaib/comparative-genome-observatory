@@ -1,10 +1,17 @@
-Fixes #<issue_number_goes_here>
+Related issue (if applicable):
 
-> It's a good idea to open an issue first for discussion.
+## Summary
 
-**Description**
-A brief summary of what this PR does and why.
+Describe the user-visible change and its purpose.
 
-- [ ] Tests pass
-- [ ] README updated if needed
-- [ ] No breaking changes (or described below)
+## Verification
+
+List the checks run and their results. Note any checks that could not be run.
+
+## Scientific data and methods
+
+For data or analysis changes, describe provenance, coordinate conventions, and methodological effects.
+
+- [ ] Tests cover changed behavior
+- [ ] Documentation reflects the change
+- [ ] Scientific claims are linked to evidence

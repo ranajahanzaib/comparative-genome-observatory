@@ -6,14 +6,14 @@ labels: enhancement
 assignees: ''
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**Problem or use case**
+Describe the task or research question this would help with.
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**Proposed change**
+Describe the behavior that would address the use case.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Alternatives considered**
+List other approaches, if relevant.
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+Include example data, screenshots, or references when they clarify the proposal.

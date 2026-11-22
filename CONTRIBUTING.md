@@ -1,46 +1,30 @@
-## Contributing
+# Contributing
 
-We welcome contributions of all kinds to improve this project! Here's how you can get involved:
+Contributions that improve scientific correctness, accessibility, security, documentation, and usability are welcome.
 
-1. **Fork the Repository**: Start by forking the repository to your GitHub account.
+## Development setup
 
-2. **Clone Your Fork**: Clone the forked repository to your local machine:
+The current project uses Python's standard library and browser APIs; no dependency installation is required. Python 3.10 or newer and Node.js are needed for the local checks.
 
-   ```bash
-   git clone <repo_url>
-   cd repo_dir
-   ```
+```bash
+git clone https://github.com/ranajahanzaib/comparative-genome-observatory.git
+cd comparative-genome-observatory
+python3 server.py
+```
 
-3. **Create a Branch**: Create a new branch for your feature or bug fix:
+Open <http://127.0.0.1:8000> to use the application. In a second terminal, run:
 
-   ```bash
-   git checkout -b feature-name
-   ```
+```bash
+make test
+make check
+```
 
-4. **Make Changes**: Make your changes to the codebase. Be sure to follow existing code style and conventions.
+## Changes and pull requests
 
-5. **Commit Changes**: Commit your changes with a clear and descriptive message:
+- Keep biological claims traceable to their data and methods. Label synthetic or user-provided evidence clearly.
+- Preserve the documented 0-based, half-open internal coordinate convention and add tests for coordinate or mapping changes.
+- Add or update tests when changing parsers, validation, or coordinate projection.
+- Document data provenance, limitations, and external tool versions when adding a source or pipeline.
+- Describe the user-visible change and verification performed in the pull request. Link related issues when applicable.
 
-   ```bash
-   git commit -m "Add detailed description of the changes"
-   ```
-
-6. **Push Changes**: Push your changes to your fork:
-
-   ```bash
-   git push origin feature-name
-   ```
-
-7. **Submit a Pull Request**: Open a pull request from your branch to the main repository's branch. Include a detailed description of your changes and the problem they solve.
-
-8. **Review and Feedback**: Participate in the review process. Make any requested changes, and your contribution will be merged!
-
-### Guidelines
-
-- Ensure your code follows the existing style and conventions.
-- Include tests for any new functionality or bug fixes.
-- Write clear, concise commit messages and pull request descriptions.
-
-### Issues
-
-Feel free to report bugs or suggest enhancements by creating an issue. Be sure to include detailed information about the problem and, if possible, steps to reproduce it.
+For bugs and feature proposals, use the repository's issue templates. Community participation follows the [Code of Conduct](CODE_OF_CONDUCT.md).
